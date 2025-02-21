@@ -1,0 +1,5 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "agb-slot")(type "KiCad")(uri "${KIPRJMOD}/agb-slot.kicad_sym")(options "")(descr ""))
+  (lib (name "AE-RP2040")(type "KiCad")(uri "${KIPRJMOD}/AE-RP2040.kicad_sym")(options "")(descr ""))
+)

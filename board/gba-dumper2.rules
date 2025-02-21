@@ -1,0 +1,81 @@
+
+(rules PCB gba-dumper.dsn
+  (snap_angle 
+    fortyfive_degree
+  )
+  (autoroute_settings
+    (fanout off)
+    (autoroute on)
+    (postroute off)
+    (vias on)
+    (via_costs 50)
+    (plane_via_costs 5)
+    (start_ripup_costs 100)
+    (start_pass_no 1)
+    (layer_rule F.Cu
+      (active on)
+      (preferred_direction horizontal)
+      (preferred_direction_trace_costs 1.0)
+      (against_preferred_direction_trace_costs 3.5)
+    )
+    (layer_rule B.Cu
+      (active on)
+      (preferred_direction vertical)
+      (preferred_direction_trace_costs 1.0)
+      (against_preferred_direction_trace_costs 3.5)
+    )
+  )
+  (rule
+    (width 200.0)
+    (clearance 200.0)
+    (clearance 100.0 (type smd_to_turn_gap))
+    (clearance 50.0 (type smd))
+    (clearance 200.0 (type "kicad_default"))
+  )
+  (padstack "Via[0-1]_600:300_um"
+    (shape
+      (circle F.Cu 600.0 0.0 0.0)
+    )
+    (shape
+      (circle B.Cu 600.0 0.0 0.0)
+    )
+    (attach off)
+  )
+  (via 
+    "Via[0-1]_600:300_um" "Via[0-1]_600:300_um" default
+  )
+  (via 
+    "Via[0-1]_600:300_um-kicad_default" "Via[0-1]_600:300_um" "kicad_default"
+  )
+  (via_rule
+    default "Via[0-1]_600:300_um"
+  )
+  (via_rule
+    "kicad_default" "Via[0-1]_600:300_um-kicad_default"
+  )
+  (class default
+    (clearance_class default)
+    (via_rule default)
+    (rule
+      (width 200.0)
+    )
+    (circuit 
+      (use_layer F.Cu B.Cu)
+    )
+  )
+  (class "kicad_default"
+    "Net-(U1-GPIO17)" "Net-(U1-GPIO11)" "Net-(U1-GPIO19)" "Net-(U1-GPIO26)" "Net-(U1-GPIO14)" "Net-(U1-GPIO1)" "Net-(U1-GPIO7)" "Net-(U1-GPIO23)"
+    "Net-(U1-GPIO20)" "Net-(U1-GPIO24)" "Net-(U1-GPIO3)" "Net-(U1-GPIO18)" "Net-(U1-GPIO13)" "Net-(U1-GPIO8)" "Net-(U1-GPIO2)" "Net-(U1-GPIO4)"
+    "Net-(U1-GPIO28)" "Net-(U1-GPIO29)" "Net-(U1-GPIO5)" "Net-(U1-GPIO9)" "unconnected-(U1-GND-Pad33)" "Net-(U1-GPIO27)" "Net-(U1-GPIO16)" "unconnected-(U1-+5V-Pad1)"
+    "Net-(U1-GPIO0)" "Net-(U1-GPIO21)" "Net-(U1-GPIO25)" "Net-(U1-GPIO22)" "Net-(U1-GPIO10)" "Net-(U1-GPIO6)" "Net-(U1-GPIO12)" "Net-(U1-GPIO15)"
+    "Net-(U2-GND)" "Net-(U1-+3.3V)"
+    (clearance_class "kicad_default")
+    (via_rule "kicad_default")
+    (rule
+      (width 200.0)
+    )
+    (circuit 
+      (use_layer F.Cu B.Cu)
+    )
+  )
+)

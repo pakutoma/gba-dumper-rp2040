@@ -1,0 +1,10 @@
+[project]
+name = "rp2040-gba-dumper"
+requires-python = "~=3.9"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+dependencies = [
+    "pyserial>=3.5",
+    "tqdm>=4.67.1",
+]
