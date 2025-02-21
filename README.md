@@ -15,6 +15,7 @@ MicroPythonで書かれており、PIOやDMAによって吸い出しの高速化
   - （多分余っているので、ぱくとまの知り合いなら渡します）
 - 秋月電子通商 RP2040マイコンボードキット AE-RP2040
   - https://akizukidenshi.com/catalog/g/g117542/
+  - Pi Pico用の最新のMicroPythonファームウェアを当ててください
 - 1.5mmピッチ32ピンソケット（GB/GBA用）
   - AliExpressとかで買うといいです
 - ピンソケット
