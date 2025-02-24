@@ -3,22 +3,22 @@ import base64
 import hashlib
 import re
 from tqdm import tqdm
-import binascii
 
 
 def main():
-    ROM_SIZE = 16 * 1024 * 1024
+    ROM_SIZE = 0
     print('connecting to serial port...')
     ser = serial.Serial('COM4')
     print('connected')
     print('read rom header')
     raw_header = dump_header(ser)
-    print(binascii.hexlify(raw_header))
     header = Header(raw_header)
     print(header)
     print('ROM header received')
+    rom_size = ROM_SIZE or guess_rom_size(ser)
+    print(f'ROM size is {rom_size / (1024 * 1024)}MB')
     print('dump rom data')
-    rom_data = dump_rom(ser, ROM_SIZE)
+    rom_data = dump_rom(ser, rom_size)
     print('ROM data received')
     md5 = hashlib.md5(rom_data).hexdigest()
     print(f'MD5 is {md5}')
@@ -45,6 +45,20 @@ def dump_rom(ser: serial, rom_size: int):
     return rom_data
 
 
+def guess_rom_size(ser: serial) -> int:
+    MEGA_BYTE = 1024 * 1024
+    length = 2
+    size_range = (2, 4, 8, 16)
+    size = 2
+    for candidate in size_range:
+        start_addr = (candidate // 2) * MEGA_BYTE
+        ser.write(f'dump 0x{start_addr:06x} {length}\n'.encode('ascii'))
+        data = receive(ser, length)
+        if int.from_bytes(data, 'big') != 0:
+            size = candidate * 2
+    return size * MEGA_BYTE
+
+
 def dump_header(ser: serial):
     header_addr = 0
     size = 192
@@ -56,6 +70,7 @@ def dump_header(ser: serial):
 def receive(ser: serial, size: int, show_progress: bool = False) -> bytes:
     data = bytearray()
     bar = tqdm(total=size, unit='B', unit_scale=True, disable=not show_progress)
+
     while True:
         line = ser.readline()
         if line == b'done\r\n':
