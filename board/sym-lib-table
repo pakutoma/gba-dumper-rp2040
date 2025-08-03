@@ -2,4 +2,5 @@
   (version 7)
   (lib (name "agb-slot")(type "KiCad")(uri "${KIPRJMOD}/agb-slot.kicad_sym")(options "")(descr ""))
   (lib (name "AE-RP2040")(type "KiCad")(uri "${KIPRJMOD}/AE-RP2040.kicad_sym")(options "")(descr ""))
+  (lib (name "ae-rp2040")(type "KiCad")(uri "C:/Users/pakutoma/Documents/ae-rp2040.kicad_sym")(options "")(descr ""))
 )
